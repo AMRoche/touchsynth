@@ -48,7 +48,6 @@ var keyboard = {
 };
 
 
-
 function setglobalwave(input){
   globalwave = input;
 }
@@ -61,6 +60,7 @@ function initAudioContext() {
     chordSelectListener();
     numOvertones();
     waveListener();
+    printToDom();
     // Fix up for prefixing
     window.AudioContext = window.AudioContext||window.webkitAudioContext;
    context = new AudioContext();
@@ -156,8 +156,7 @@ function registerKeyPress(){
 	//  alert(character);
 	  if(noteArr.indexOf(character) > -1){
 	var noteplaying = noteArr.indexOf(character);
-  console.log(noteplaying+":"+noteRatio+":"+firstNote);
-  console.log(Math.pow(noteRatio,noteplaying)*firstNote);
+      noteCheck(Math.pow(noteRatio,noteplaying)*firstNote);
 			keyboard.keydown(noteplaying.toString(),Math.pow(noteRatio,noteplaying)*firstNote,chord);
 		}
 	};
@@ -210,4 +209,34 @@ function waveListener(){
       setglobalwave(2);
     }
   };
+}
+
+function noteCheck(freq){
+  var note = 1;
+  var textNote;
+  //debug this for the case of D#/Eb etc.
+  console.log(freq);
+  for(var i in noteNames){
+    var f2c = freq/noteNames[i];
+    if((f2c - Math.floor(f2c)) > (Math.ceil(f2c) - f2c)){
+      if((Math.ceil(f2c) - f2c)<note) {
+        note =  (Math.ceil(f2c) - f2c);
+        textNote = i;
+      }
+    }else{
+      if((f2c - Math.floor(f2c))<note){
+        note = (f2c - Math.floor(f2c));
+        textNote = i;
+      }
+    }
+  }
+  return textNote;
+}
+
+function printToDom(){
+  for(var i = 0; i < noteArr.length; i++){
+    console.log(i);
+      document.getElementById("notesList").innerHTML +=
+  "<span id=\"notePlaying"+i+"\">"+noteCheck(Math.pow(noteRatio,i)*firstNote)+"</span><br>";
+  }
 }

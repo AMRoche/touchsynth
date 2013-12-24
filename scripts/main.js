@@ -156,7 +156,9 @@ function registerKeyPress(){
 	//  alert(character);
 	  if(noteArr.indexOf(character) > -1){
 	var noteplaying = noteArr.indexOf(character);
-			keyboard.keydown(noteplaying.toString(),firstNote+(noteplaying*noteRatio*firstNote),chord);
+  console.log(noteplaying+":"+noteRatio+":"+firstNote);
+  console.log(Math.pow(noteRatio,noteplaying)*firstNote);
+			keyboard.keydown(noteplaying.toString(),Math.pow(noteRatio,noteplaying)*firstNote,chord);
 		}
 	};
 

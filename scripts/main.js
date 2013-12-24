@@ -217,16 +217,26 @@ function noteCheck(freq){
   //debug this for the case of D#/Eb etc.
   console.log(freq);
   for(var i in noteNames){
+
     var f2c = freq/noteNames[i];
+//    console.log("----------");
+//console.log(i+","+freq);
+//  console.log(((f2c - Math.floor(f2c)) > (Math.ceil(f2c) - f2c)));
+//  console.log((f2c - Math.floor(f2c)) +","+ (Math.ceil(f2c) - f2c));
+//  console.log(Math.floor(f2c)+","+Math.ceil(f2c));
     if((f2c - Math.floor(f2c)) > (Math.ceil(f2c) - f2c)){
       if((Math.ceil(f2c) - f2c)<note) {
-        note =  (Math.ceil(f2c) - f2c);
-        textNote = i;
+        if((Math.log(Math.ceil(f2c)) / Math.log(2)) == Math.floor(Math.log(Math.ceil(f2c)) / Math.log(2))){
+          note =  (Math.ceil(f2c) - f2c);
+          textNote = i;
+        }
       }
     }else{
       if((f2c - Math.floor(f2c))<note){
-        note = (f2c - Math.floor(f2c));
-        textNote = i;
+        if((Math.log(Math.floor(f2c)) / Math.log(2)) == Math.ceil((Math.log(Math.floor(f2c)) / Math.log(2)))){
+          note = (f2c - Math.floor(f2c));
+          textNote = i;
+        }
       }
     }
   }

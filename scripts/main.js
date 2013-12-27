@@ -16,7 +16,19 @@ var chords = {
 var active_voices = {};
 var noteRatio = 1.05932721713;
 var noteArr = [122,120,99,118,98,110,111];
-var firstNote = 440;
+var firstNote = 220;
+var firstNotes = {"C" : 261.63,
+"C#/Db" : 277.18,
+"D" : 293.66,
+"D#/Eb" : 311.13,
+"E" : 329.63,
+"F" : 349.23,
+"F#/Gb" : 369.99,
+"G" : 392.00,
+"G#/Ab" : 415/30,
+"A" : 220,
+"A#/Bb" : 233.08,
+"B" : 246.94};
 var Voice;
 var wavetypes = ["SQUARE","SINE","TRIANGLE"];
 var globalwave = 0;
@@ -61,6 +73,7 @@ function initAudioContext() {
     numOvertones();
     waveListener();
     printToDom();
+    changeStartingNote();
     // Fix up for prefixing
     window.AudioContext = window.AudioContext||window.webkitAudioContext;
    context = new AudioContext();
@@ -215,7 +228,7 @@ function noteCheck(freq){
   var note = 1;
   var textNote;
   //debug this for the case of D#/Eb etc.
-  console.log(freq);
+  //console.log(freq);
   for(var i in noteNames){
 
     var f2c = freq/noteNames[i];
@@ -244,9 +257,18 @@ function noteCheck(freq){
 }
 
 function printToDom(){
+
+  document.getElementById("notesList").innerHTML = "";
   for(var i = 0; i < noteArr.length; i++){
-    console.log(i);
+ //   console.log(i);
       document.getElementById("notesList").innerHTML +=
   "<span id=\"notePlaying"+i+"\">"+noteCheck(Math.pow(noteRatio,i)*firstNote)+"</span><br>";
   }
+}
+
+function changeStartingNote(){
+document.getElementById("startingNote").onchange = function(){
+  firstNote = firstNotes[document.getElementById("startingNote").value];
+  printToDom();
+};
 }

@@ -3,6 +3,7 @@
    <meta name='viewport' content='user-scalable=no'/>
     <meta name='apple-mobile-web-app-capable' content='yes'/>
     <meta name='apple-mobile-web-app-status-bar-style' content='black-translucent'/>
+    <link rel="stylesheet" href="css/main.css"/>
 
 </head>
 <body>
@@ -12,7 +13,7 @@
 	<option value="setTri">Triangle</option>
 	<option value="setSquare">Square</option>
 </select>
-<label for="startingNote">Starting Note:</label>
+<label for="startingNote">Starting Note : </label>
 <select id="startingNote">
 	<option value="A">A</option>
 	<option value="A#/Bb">A#/Bb</option>
@@ -27,6 +28,16 @@
 	<option value="G">G</option>
 	<option value="G#/Ab">G#/Ab</option>
 </select>
+<label for="octave"> Octave : </label>
+<select id="octave">
+	<option value="1">1</option>
+	<option value="2">2</option>
+	<option value="3">3</option>
+	<option value="4" selected="selected">4</option>
+	<option value="5">5</option>
+	<option value="6">6</option>
+	<option value="7">7</option>
+</select>
 
 <label for="chordSelect">Chord Type :</label>
 <select id="chordSelect">
@@ -39,8 +50,14 @@
 	<option value="maj7th">Major 7th</option>
 </select>
 <label for="overtones">Ammount of overtones :</label>
-<input type="number" id="overtones" value="1" step="1" min="1" max="5">
-<label for="notesList">List of Notes Playable :</label><div id="notesList"></div>
+<select id="overtones">
+	<option value="1" selected="selected">1</option>
+	<option value="2">2</option>
+	<option value="3">3</option>
+	<option value="4">4</option>
+	<option value="5">5</option>
+</select>
+<label for="notesList">List of Notes Playable :</label><ul id="notesList"></ul>
 </body>
 <script src="scripts/main.js" type="text/javascript"></script>
 </html>

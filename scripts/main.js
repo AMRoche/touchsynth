@@ -4,6 +4,7 @@ var context;
 var chord = "";
 var overtone = [0.1,0.1,0.1,0.1,0.4];
 var overtoneDecay = [1] ;
+var chosenNotes = [];
 var chords = {
 "major" : [4,5,6],
 "minor" : [10,12,15],
@@ -72,6 +73,7 @@ function initAudioContext() {
     chordSelectListener();
     numOvertones();
     waveListener();
+    octaveListener();
     printToDom();
     changeStartingNote();
     // Fix up for prefixing
@@ -259,15 +261,41 @@ function noteCheck(freq){
 function printToDom(){
 
   document.getElementById("notesList").innerHTML = "";
-  for(var i = 0; i < noteArr.length; i++){
+//  for(var i = 0; i < noteArr.length; i++){
+    for(var i = 0; i < 12; i++){
  //   console.log(i);
-      document.getElementById("notesList").innerHTML +=
-  "<span id=\"notePlaying"+i+"\">"+noteCheck(Math.pow(noteRatio,i)*firstNote)+"</span><br>";
+    var list = document.createElement("li");
+    list.setAttribute("id","notePlaying"+i);
+    list.setAttribute("class","noteSelect");
+    list.setAttribute("data-noteName",noteCheck(Math.pow(noteRatio,i)*firstNote));
+    list.innerHTML = noteCheck(Math.pow(noteRatio,i)*firstNote);
+    list.onclick = function(){
+      chosenNotes.push(
+        {
+          "noteName":this.getAttribute("data-noteName")
+        }
+        );
+      console.log(chosenNotes);
+    };
+    document.getElementById("notesList").appendChild(list);
   }
+
 }
 
 function changeStartingNote(){
 document.getElementById("startingNote").onchange = function(){
+  firstNote = firstNotes[document.getElementById("startingNote").value];
+  printToDom();
+};
+}
+function octaveListener(){
+document.getElementById("octave").onchange = function(){
+  //firstNotes noteNames
+  for(var i in firstNotes){
+    if(firstNotes.hasOwnProperty(i)){
+      firstNotes[i] = noteNames[i] * Math.pow(2,parseInt(document.getElementById("octave").value));
+    }
+  }
   firstNote = firstNotes[document.getElementById("startingNote").value];
   printToDom();
 };

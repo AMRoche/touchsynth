@@ -1,0 +1,18 @@
+* {box-sizing: border-box;}
+
+#notesList{
+	float: left;
+	.noteSelect{
+		float: left;
+		background-color: rgba(100,100,255,1);
+		width: 100px;
+		height: 50px;
+		margin: 10px;
+		border: 5px solid black;
+		border-radius: 5px;
+	}
+	.noteSelect:hover{
+		background-color: rgba(155,155,255,1);
+	}
+}
+

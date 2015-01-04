@@ -1,0 +1,2 @@
+setupCanvas();
+drawHexes();

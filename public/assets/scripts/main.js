@@ -74,7 +74,7 @@ function initAudioContext() {
     numOvertones();
     waveListener();
     octaveListener();
-    printToDom();
+    //printToDom();
     changeStartingNote();
     // Fix up for prefixing
     window.AudioContext = window.AudioContext||window.webkitAudioContext;
@@ -285,7 +285,7 @@ function printToDom(){
 function changeStartingNote(){
 document.getElementById("startingNote").onchange = function(){
   firstNote = firstNotes[document.getElementById("startingNote").value];
-  printToDom();
+  //printToDom();
 };
 }
 function octaveListener(){
@@ -297,6 +297,6 @@ document.getElementById("octave").onchange = function(){
     }
   }
   firstNote = firstNotes[document.getElementById("startingNote").value];
-  printToDom();
+  //printToDom();
 };
 }

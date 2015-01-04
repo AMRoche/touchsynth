@@ -3,7 +3,8 @@
    <meta name='viewport' content='user-scalable=no'/>
     <meta name='apple-mobile-web-app-capable' content='yes'/>
     <meta name='apple-mobile-web-app-status-bar-style' content='black-translucent'/>
-    <link rel="stylesheet" href="css/main.css"/>
+    <link rel="stylesheet" href="assets/css/ie.css"/>
+    <link rel="stylesheet" href="assets/css/touchsynth.css"/>
 
 </head>
 <body>
@@ -59,7 +60,12 @@
 </select>
 <label for="notesList">List of Notes Playable :</label><ul id="notesList"></ul>
 
-<canvas id="hex"></canvas>
+<div id="hexKeyboard">
+	<canvas id="hex"></canvas>
+	<img src="assets/img/transparimage.png" width='300' height='150' usemap="#hexesMap" alt="">
+	<map id="hexMap" name="hexesMap"></map>
+</div>
+
 </body>
 	<script src="assets/scripts/main.js" type="text/javascript"></script>
 
